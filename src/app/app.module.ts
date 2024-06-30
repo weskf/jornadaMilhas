@@ -28,9 +28,11 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
 
 import { BotaoControleComponent } from './shared/botao-controle/botao-controle.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { PromocoesComponent } from './pages/home/promocoes/promocoes.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DropdownUfComponent } from './shared/dropdown-uf/dropdown-uf.component';
@@ -39,6 +41,8 @@ import { DepoimentosComponent } from './pages/home/depoimentos/depoimentos.compo
 import { LoginComponent } from './pages/login/login.component';
 import { FormBaseComponent } from './shared/form-base/form-base.component';
 import { CadastroComponent } from './pages/cadastro/cadastro.component';
+import { PerfilComponent } from './pages/perfil/perfil.component';
+import { AutenticacaoInterceptor } from './core/interceptors/autenticacao.interceptor';
 
 @NgModule({
   declarations: [
@@ -61,6 +65,7 @@ import { CadastroComponent } from './pages/cadastro/cadastro.component';
     LoginComponent,
     FormBaseComponent,
     CadastroComponent,
+    PerfilComponent,
   ],
   imports: [
     BrowserModule,
@@ -81,9 +86,15 @@ import { CadastroComponent } from './pages/cadastro/cadastro.component';
     ReactiveFormsModule,
     MatAutocompleteModule,
     MatDividerModule,
-    MatRadioModule
+    MatRadioModule,
+    MatOptionModule,
+    MatSelectModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AutenticacaoInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
