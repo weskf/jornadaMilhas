@@ -7,10 +7,19 @@ import { FormBuscaService } from 'src/app/core/services/form-busca.service';
   styleUrls: ['./form-busca.component.scss']
 })
 export class FormBuscaComponent {
-  constructor( 
+  constructor(
     public formBuscaService : FormBuscaService) {}
 
   buscar () {
     console.log(this.formBuscaService.formBusca.value)
+
+    if(this.formBuscaService.formIsValido){
+      const formBuscaValue = this.formBuscaService.formBusca.value;
+      this.realizarBusca.emit(formBuscaValue)
+    }
+    else{
+      alert('O formulário precisa ser valido')
+    }
+
   }
 }

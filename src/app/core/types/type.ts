@@ -28,4 +28,12 @@ export interface PessoaUsuaria {
   cidade: string;
   estado: UnidadeFederativa;
   genero: string;
+
+}
+
+export interface Orcamento{
+  descricao: string;
+  preco: number;
+  taxaEmbarque: number;
+  total: number
 }
