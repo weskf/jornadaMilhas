@@ -2,12 +2,12 @@
   <mat-card>
     <form [formGroup]="cadastroForm">
       <mat-card-title>
-        {{titulo}}
+        {{ titulo }}
       </mat-card-title>
       <section>
         <div class="acoesPerfil" *ngIf="perfilComponent">
           <h2>Dados pessoais</h2>
-          <button mat-stroked-button color="primary" (click)="deslogar()" >
+          <button (click)="deslogar()" mat-stroked-button color="primary">
             <mat-icon>logout</mat-icon>
             DESLOGAR
           </button>
@@ -54,22 +54,23 @@
                 <mat-radio-button value="outro">Prefiro não informar</mat-radio-button>
               </mat-radio-group>
             </div>
-            <mat-form-field appearance="outline">
-              <mat-label>Telefone</mat-label>
-              <input matInput formControlName="telefone" placeholder="+XX XXXX-XXXX">
-              <mat-error *ngIf="cadastroForm.get('telefone')?.errors">Telefone é obrigatório</mat-error>
-            </mat-form-field>
-            <app-dropdown-uf
-              label="Estado"
-              placeholder="Estado"
-              [control]="estadoControl">
-            </app-dropdown-uf>
-            <mat-error *ngIf="estadoControl?.errors && estadoControl?.touched">Estado é obrigatório</mat-error>
+              <mat-form-field appearance="outline">
+                <mat-label>Telefone</mat-label>
+                <input matInput formControlName="telefone" placeholder="+XX XXXX-XXXX">
+                <mat-error *ngIf="cadastroForm.get('telefone')?.errors">Telefone é obrigatório</mat-error>
+              </mat-form-field>
+            <div class="drop-container">
+              <app-dropdown-uf
+                label="Estado"
+                placeholder="Estado"
+                [control]="estadoControl">
+              </app-dropdown-uf>
+              <mat-error class="custom-error" *ngIf="estadoControl?.errors && estadoControl?.touched">Estado é obrigatório</mat-error>
+          </div>
           </div>
         </div>
       </mat-card-content>
-      <mat-divider></mat-divider>
-
+      <mat-divider *ngIf="perfilComponent"></mat-divider>
       <div class="acessoPerfil" *ngIf="perfilComponent">
         <h2>Dados de acesso</h2>
       </div>
@@ -112,10 +113,11 @@
       </mat-card-content>
       <mat-card-actions class="full-width">
         <button mat-flat-button
-          [class.perfilButton]="perfilComponent"
           [disabled]="cadastroForm.invalid"
+          (click)="executarAcao()"
+          [class.perfil-button]="perfilComponent"
           color="primary"
-          (click)="executarAcao()">{{textoBotao}}
+        >{{ textoBotao }}
         </button>
       </mat-card-actions>
     </form>

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { PromocaoService } from 'src/app/core/services/promocao.service';
 
 @Component({
@@ -8,10 +7,7 @@ import { PromocaoService } from 'src/app/core/services/promocao.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  constructor(
-    private servicoPromocao: PromocaoService,
-    private router: Router
-   ) {
+  constructor( private servicoPromocao: PromocaoService ) {
 
   }
   ngOnInit(): void {
@@ -21,9 +17,5 @@ export class HomeComponent implements OnInit {
           console.log(resposta)
         }
       )
-  }
-
-  navegarParaBusca(ev: any){
-    this.router.navigate(['busca'])
   }
 }

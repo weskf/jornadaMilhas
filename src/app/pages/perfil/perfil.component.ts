@@ -13,50 +13,48 @@ import { PessoaUsuaria } from 'src/app/core/types/type';
   styleUrls: ['./perfil.component.scss']
 })
 export class PerfilComponent implements OnInit{
+  titulo = 'Olá, ';
+  textoBotao = 'ATUALIZAR';
+  perfilComponent = true;
 
-  titulo: string = 'Olá';
-  textoBotao: string = 'ATUALIZAR';
-  perfilComponent: boolean = true;
-  token = '';
   cadastro!: PessoaUsuaria;
-  nome = '';
+  token: string = '';
+  nome: string = '';
   form!: FormGroup<any> | null;
 
   constructor(
-    private tokenService: TokenService,
     private cadastroService: CadastroService,
+    private tokenService: TokenService,
     private formularioService: FormularioService,
-    private router: Router,
-    private userService: UserService
-  ){}
+    private userService: UserService,
+    private router: Router
+  ) { }
 
-  ngOnInit(): void {
-
+  ngOnInit() {
     this.token = this.tokenService.retornarToken();
-
-    this.cadastroService.buscarCadastro().subscribe(cadastro =>{
+    this.cadastroService.buscarCadastro().subscribe(cadastro => {
       this.cadastro = cadastro;
-      this.nome = this.cadastro.nome;
-      this.carregarForm();
-    });
-}
+      this.nome = cadastro.nome;
+      this.carregarFormulario();
+    })
+  }
 
-  carregarForm(){
+  carregarFormulario() {
     this.form = this.formularioService.getCadastro();
     this.form?.patchValue({
       nome: this.cadastro.nome,
       nascimento: this.cadastro.nascimento,
       cpf: this.cadastro.cpf,
-      telefone: this.cadastro.telefone,
+      cidade: this.cadastro.cidade,
       email: this.cadastro.email,
       senha: this.cadastro.senha,
       genero: this.cadastro.genero,
-      cidade: this.cadastro.cidade,
-      estado: this.cadastro.estado
+      telefone: this.cadastro.telefone,
+      estado: this.cadastro.estado,
     });
   }
 
-  atualizar(){
+  atualizar() {
     const dadosAtualizados = {
       nome: this.form?.value.nome,
       nascimento: this.form?.value.nascimento,
@@ -71,16 +69,16 @@ export class PerfilComponent implements OnInit{
 
     this.cadastroService.editarCadastro(dadosAtualizados).subscribe({
       next: () => {
-        alert('Cadastro editado');
-        this.router.navigate(['/'])
+        alert('Cadastro editado com sucesso')
+        this.router.navigate(['/']);
       },
       error: (err) => {
-        console.log('erro ao atualizar cadastro: ', err)
+        console.log(err)
       }
     })
   }
 
-  deslogar(){
+  deslogar() {
     this.userService.logout();
     this.router.navigate(['/login']);
   }

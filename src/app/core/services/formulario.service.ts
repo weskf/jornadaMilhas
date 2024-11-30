@@ -8,7 +8,6 @@ export class FormularioService {
 
   cadastroForm: FormGroup | null = null;
 
-
   getCadastro(): FormGroup | null{
     return this.cadastroForm;
   }

@@ -26,10 +26,6 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { ModalComponent } from './shared/modal/modal.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatRadioModule } from '@angular/material/radio';
-import { MatOptionModule } from '@angular/material/core';
-import { MatSelectModule } from '@angular/material/select';
 
 import { BotaoControleComponent } from './shared/botao-controle/botao-controle.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
@@ -40,10 +36,12 @@ import { SeletorPassageiroComponent } from './shared/seletor-passageiro/seletor-
 import { DepoimentosComponent } from './pages/home/depoimentos/depoimentos.component';
 import { LoginComponent } from './pages/login/login.component';
 import { FormBaseComponent } from './shared/form-base/form-base.component';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { CadastroComponent } from './pages/cadastro/cadastro.component';
 import { PerfilComponent } from './pages/perfil/perfil.component';
 import { AutenticacaoInterceptor } from './core/interceptors/autenticacao.interceptor';
-import { BuscaComponent } from './pages/pages/busca/busca.component';
 
 @NgModule({
   declarations: [
@@ -66,8 +64,7 @@ import { BuscaComponent } from './pages/pages/busca/busca.component';
     LoginComponent,
     FormBaseComponent,
     CadastroComponent,
-    PerfilComponent,
-    BuscaComponent
+    PerfilComponent
   ],
   imports: [
     BrowserModule,
@@ -87,10 +84,9 @@ import { BuscaComponent } from './pages/pages/busca/busca.component';
     HttpClientModule,
     ReactiveFormsModule,
     MatAutocompleteModule,
-    MatDividerModule,
     MatRadioModule,
-    MatOptionModule,
-    MatSelectModule
+    MatDividerModule,
+    MatCheckboxModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
