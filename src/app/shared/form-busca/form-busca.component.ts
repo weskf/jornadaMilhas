@@ -15,7 +15,7 @@ export class FormBuscaComponent {
 
   buscar () {
     if(this.formBuscaService.formIsValido){
-      const formBuscaValue = this.formBuscaService.formBusca.value;
+      const formBuscaValue = this.formBuscaService.obterDadosBusca();
       this.realizarBusca.emit(formBuscaValue)
     }
     else{
